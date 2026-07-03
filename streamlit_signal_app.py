@@ -71,6 +71,20 @@ st.markdown(
         border-color: #1e40af;
         color: white;
     }
+    @media (max-width: 640px) {
+        .stMarkdown h1 {
+            font-size: 1.35rem;
+            line-height: 1.2;
+        }
+        .stMarkdown h2 {
+            font-size: 1.15rem;
+            line-height: 1.25;
+        }
+        .stMarkdown h3 {
+            font-size: 1rem;
+            line-height: 1.3;
+        }
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -210,6 +224,8 @@ The strategy uses QQQ as the core asset and SOXS short exposure as a risk-contro
 Do not give personalized financial advice. Do not tell the user to trade immediately.
 Explain the market context, the current signal, and the risk posture in plain English.
 Write like a disciplined trading note, not a generic financial-news summary.
+Do not write a large title, subtitle, date header, "Week Ending" line, or intro paragraph.
+Start directly with section 1.
 
 Current signal:
 - Action: {sig["action"]}
@@ -231,17 +247,21 @@ Last roughly one trading week:
 
 Write exactly four sections:
 1. Weekly read
-   - 3 to 5 bullets.
-   - Explain what happened this week in QQQ, SOXS, VIX, and semiconductor leadership.
-   - Mention whether the price action supports patience, adding, reducing, or staying neutral.
+   - Maximum 3 bullets.
+   - Each bullet must be 8 to 14 words.
+   - Use about 25% of a normal weekly summary length.
+   - Cover QQQ, SOXS, VIX, and semiconductor leadership only if important.
 2. Current signal
    - 1 or 2 sentences only.
+   - Maximum 35 words total.
    - Directly translate the signal into a practical manual-trading posture.
 3. Risk watch
-   - 2 to 4 bullets.
+   - 2 to 3 bullets.
+   - Each bullet must be 8 to 16 words.
    - Keep this section useful; include drawdown, volatility, VIX, QQQ trend, and short-leveraged-ETF squeeze risk if relevant.
 4. Semiconductor / AI News That Matters
-   - Give 3 to 5 bullets with more detail than headline repetition.
+   - Give 3 to 4 bullets with more detail than headline repetition.
+   - Each bullet must be 12 to 22 words.
    - Focus on news that could affect QQQ trend through semiconductors, AI capex, chip demand, export controls, foundry capacity, memory pricing, or mega-cap AI spending.
    - If the provided headlines are thin, say the news signal is limited instead of inventing details.
 """.strip()
