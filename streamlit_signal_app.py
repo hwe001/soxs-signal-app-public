@@ -40,7 +40,20 @@ SOXS_HIGH_LOOKBACK = 20
 QQQ_MA_LOOKBACK = 20
 RSI_PERIOD = 14
 CLAUDE_MODEL = "claude-haiku-4-5"
-AI_NEWS_SYMBOLS = ["NVDA", "MSFT", "GOOGL", "META", "AMZN", "AVGO", "AMD", "TSM"]
+AI_NEWS_SYMBOLS = [
+    "NVDA",
+    "AVGO",
+    "AMD",
+    "TSM",
+    "ASML",
+    "AMAT",
+    "MU",
+    "SMH",
+    "MSFT",
+    "GOOGL",
+    "META",
+    "AMZN",
+]
 
 
 st.set_page_config(page_title="SOXS Signal", page_icon="📈", layout="wide")
@@ -191,11 +204,12 @@ def build_weekly_brief_prompt(df: pd.DataFrame, sig: dict) -> str:
     vix_change = recent["VIX"].iloc[-1] - recent["VIX"].iloc[0]
 
     return f"""
-You are writing a concise weekly market brief for a private manual trading dashboard.
+You are writing a focused weekly market brief for a private manual trading dashboard.
 The strategy uses QQQ as the core asset and SOXS short exposure as a risk-controlled overlay.
 
 Do not give personalized financial advice. Do not tell the user to trade immediately.
-Explain the signal and the risk posture in plain English.
+Explain the market context, the current signal, and the risk posture in plain English.
+Write like a disciplined trading note, not a generic financial-news summary.
 
 Current signal:
 - Action: {sig["action"]}
@@ -215,11 +229,21 @@ Last roughly one trading week:
 - SOXS return: {pct(soxs_week)}
 - VIX change: {vix_change:+.2f}
 
-Write exactly four short sections:
+Write exactly four sections:
 1. Weekly read
+   - 3 to 5 bullets.
+   - Explain what happened this week in QQQ, SOXS, VIX, and semiconductor leadership.
+   - Mention whether the price action supports patience, adding, reducing, or staying neutral.
 2. Current signal
+   - 1 or 2 sentences only.
+   - Directly translate the signal into a practical manual-trading posture.
 3. Risk watch
-4. What would change the signal
+   - 2 to 4 bullets.
+   - Keep this section useful; include drawdown, volatility, VIX, QQQ trend, and short-leveraged-ETF squeeze risk if relevant.
+4. Semiconductor / AI News That Matters
+   - Give 3 to 5 bullets with more detail than headline repetition.
+   - Focus on news that could affect QQQ trend through semiconductors, AI capex, chip demand, export controls, foundry capacity, memory pricing, or mega-cap AI spending.
+   - If the provided headlines are thin, say the news signal is limited instead of inventing details.
 """.strip()
 
 
@@ -276,7 +300,7 @@ Recent AI / semiconductor / mega-cap headlines that may affect QQQ:
 
 Use the headlines only as context. Do not invent facts beyond these headlines.
 If the headlines are not clearly relevant, say that news context is limited.
-In section 3, mention whether AI-sector news appears supportive, neutral, or risky for QQQ trend.
+In the semiconductor / AI news section, explain why each important item could matter for QQQ trend.
 """.strip()
 
 
