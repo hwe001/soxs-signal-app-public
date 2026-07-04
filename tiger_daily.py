@@ -167,14 +167,21 @@ def build_orders(positions: list[dict], option_values: dict, nav: float,
     if crypto_frac > TARGETS["crypto_cap"] + 0.02:
         excess = crypto_val - TARGETS["crypto_cap"] * nav
         bitx_px = prices.get("BITX")
-        if bitx_px:
-            qty = math.ceil(excess / bitx_px)
-            have = int(df.loc[df["symbol"] == "BITX", "qty"].sum()) if len(df) else 0
-            qty = min(qty, max(have, 0))
-            if qty > 0:
+        have = int(df.loc[df["symbol"] == "BITX", "qty"].sum()) if len(df) else 0
+        if bitx_px and have > 0:
+            if sig["btc_on"]:
+                contracts = max(have // 100, 1)
                 orders.append(
-                    f"SELL {qty} BITX (~${qty * bitx_px:,.0f}): crypto theme {crypto_frac:.0%} "
-                    f"of NAV exceeds the {TARGETS['crypto_cap']:.0%} cap. Trim the decay vehicle first.")
+                    f"BITX PAID EXIT (crypto {crypto_frac:.0%} > {TARGETS['crypto_cap']:.0%} cap; "
+                    f"BTC trend ON, so exit patiently): keep {contracts} covered calls sold, "
+                    f"ATM to 5% OTM, 30-45 DTE — take assignment, never roll up. "
+                    f"HARD FLOOR: the day BTC closes below its 20-day MA, sell all {have} BITX at market.")
+            else:
+                qty = min(math.ceil(excess / bitx_px), have)
+                orders.append(
+                    f"SELL {qty} BITX (~${qty * bitx_px:,.0f}): crypto {crypto_frac:.0%} exceeds the "
+                    f"{TARGETS['crypto_cap']:.0%} cap and BTC trend is OFF — the patient-exit "
+                    f"condition failed. Exit at market; buy back covered calls with the sale.")
     if not sig["danger"] and sig["hive_target"] == 0.0 and crypto_frac > 0.05:
         hive_px = prices.get("HIVE")
         have = int(df.loc[df["symbol"] == "HIVE", "qty"].sum()) if len(df) else 0
