@@ -104,11 +104,13 @@ def compute_signals(px: pd.DataFrame) -> dict:
     last = px.iloc[-1]
     btc_ma20 = px["BTC-USD"].rolling(20).mean().iloc[-1]
     qqq_ma50 = px["QQQ"].rolling(50).mean().iloc[-1]
+    qqq_ma200 = px["QQQ"].rolling(200).mean().iloc[-1]
     smh_ma200 = px["SMH"].rolling(200).mean().iloc[-1]
     vix = float(last["^VIX"])
 
     btc_on = float(last["BTC-USD"]) >= btc_ma20
     qqq_on = float(last["QQQ"]) >= qqq_ma50
+    qqq200_on = float(last["QQQ"]) >= qqq_ma200
     smh_on = float(last["SMH"]) >= smh_ma200
     danger = vix >= VIX_DANGER
 
@@ -131,9 +133,11 @@ def compute_signals(px: pd.DataFrame) -> dict:
         "danger": danger,
         "btc_on": btc_on,
         "qqq_on": qqq_on,
+        "qqq200_on": qqq200_on,
         "smh_on": smh_on,
         "btc": float(last["BTC-USD"]), "btc_ma20": float(btc_ma20),
         "qqq": float(last["QQQ"]), "qqq_ma50": float(qqq_ma50),
+        "qqq_ma200": float(qqq_ma200),
         "smh": float(last["SMH"]), "smh_ma200": float(smh_ma200),
         "hive_target": hive_target,
         "hive_note": hive_note,
@@ -192,6 +196,20 @@ def build_orders(positions: list[dict], option_values: dict, nav: float,
     soxl_qty = int(df.loc[df["symbol"] == "SOXL", "qty"].sum()) if len(df) else 0
     if not sig["smh_on"] and soxl_qty > 0:
         orders.append(f"SELL {soxl_qty} SOXL: SMH closed below its 200-day MA — semi trend OFF.")
+
+    # 2b) Core sleeve (DRIFTNET v2): hold QQQ/SPYM only while QQQ >= its 200-day MA.
+    core_val = theme_val.get("core", 0.0)
+    if not sig["qqq200_on"] and core_val > 0.02 * nav:
+        core_rows = df[(df["theme"] == "core") & (df["qty"] > 0)] if len(df) else df
+        for _, r in core_rows.iterrows():
+            orders.append(
+                f"SELL {int(r['qty'])} {r['symbol']} (~${r['value']:,.0f}): QQQ closed below "
+                f"its 200-day MA — core trend OFF, park in cash (DRIFTNET v2 rule).")
+    elif sig["qqq200_on"] and core_val < (TARGETS["core"] - 0.10) * nav:
+        orders.append(
+            f"NOTE: core is {core_val / nav:.0%} of NAV vs {TARGETS['core']:.0%} target and the "
+            f"QQQ 200-day trend is ON — add to QQQ/SPYM gradually with spare cash "
+            f"(respect the {TARGETS['cash_floor']:.0%} cash floor).")
 
     # 3) Short-inverse sleeves with band logic.
     for sym, tgt_key in (("SOXS", "semi_short_target"), ("SQQQ", "index_short_target")):
@@ -289,14 +307,16 @@ def render() -> None:
     now_ny = datetime.now(ZoneInfo("America/New_York"))
     st.write(f"Data as of close **{sig['asof']}** — New York time now: {now_ny:%Y-%m-%d %H:%M}")
 
-    c1, c2, c3, c4 = st.columns(4)
+    c1, c2, c3, c4, c5 = st.columns(5)
     c1.metric("BTC vs 20-day MA", "ON ✅" if sig["btc_on"] else "OFF ❌",
               f"{sig['btc']:,.0f} / {sig['btc_ma20']:,.0f}")
     c2.metric("QQQ vs 50-day MA", "ON ✅" if sig["qqq_on"] else "OFF ❌",
               f"{sig['qqq']:,.0f} / {sig['qqq_ma50']:,.0f}")
-    c3.metric("SMH vs 200-day MA", "ON ✅" if sig["smh_on"] else "OFF ❌",
+    c3.metric("QQQ vs 200-day MA (core)", "ON ✅" if sig["qqq200_on"] else "OFF ❌",
+              f"{sig['qqq']:,.0f} / {sig['qqq_ma200']:,.0f}")
+    c4.metric("SMH vs 200-day MA", "ON ✅" if sig["smh_on"] else "OFF ❌",
               f"{sig['smh']:,.0f} / {sig['smh_ma200']:,.0f}")
-    c4.metric("VIX", f"{sig['vix']:.1f}", "DANGER" if sig["danger"] else "ok",
+    c5.metric("VIX", f"{sig['vix']:.1f}", "DANGER" if sig["danger"] else "ok",
               delta_color="inverse")
 
     st.subheader("Today's orders")
@@ -322,8 +342,9 @@ def cli() -> None:
     sig = compute_signals(px)
     orders, exposure = build_orders(positions, {}, DEFAULT_NAV, sig, sig["prices"])
     print(f"As of close {sig['asof']}: BTC {'ON' if sig['btc_on'] else 'OFF'} | "
-          f"QQQ {'ON' if sig['qqq_on'] else 'OFF'} | SMH {'ON' if sig['smh_on'] else 'OFF'} | "
-          f"VIX {sig['vix']:.1f}")
+          f"QQQ50 {'ON' if sig['qqq_on'] else 'OFF'} | "
+          f"QQQ200/core {'ON' if sig['qqq200_on'] else 'OFF'} | "
+          f"SMH {'ON' if sig['smh_on'] else 'OFF'} | VIX {sig['vix']:.1f}")
     print(f"HIVE sleeve: {sig['hive_note']}\n")
     if orders:
         print("SIGNALS (with empty placeholder positions):")
