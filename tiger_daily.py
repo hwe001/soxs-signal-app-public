@@ -77,6 +77,7 @@ BAND_LOW_MULT = 0.65
 BAND_HIGH_MULT = 1.35
 
 VIX_DANGER = 40.0
+SHORT_VOL_KILL = 1.75  # cover a short sleeve when its 20-day realized vol >= 175%
 SIGNAL_SYMBOLS = ["BTC-USD", "QQQ", "SMH", "HIVE", "SOXS", "SQQQ", "^VIX"]
 
 
@@ -113,6 +114,10 @@ def compute_signals(px: pd.DataFrame) -> dict:
     qqq200_on = float(last["QQQ"]) >= qqq_ma200
     smh_on = float(last["SMH"]) >= smh_ma200
     danger = vix >= VIX_DANGER
+    short_vol = {
+        sym: float(px[sym].pct_change().rolling(20).std().iloc[-1]) * math.sqrt(252)
+        for sym in ("SOXS", "SQQQ")
+    }
 
     if danger:
         hive_target = 0.0
@@ -141,6 +146,7 @@ def compute_signals(px: pd.DataFrame) -> dict:
         "smh": float(last["SMH"]), "smh_ma200": float(smh_ma200),
         "hive_target": hive_target,
         "hive_note": hive_note,
+        "short_vol": short_vol,
         "prices": {s: float(last[s]) for s in px.columns},
     }
 
@@ -218,15 +224,19 @@ def build_orders(positions: list[dict], option_values: dict, nav: float,
             continue
         qty = int(df.loc[df["symbol"] == sym, "qty"].sum()) if len(df) else 0
         frac = abs(min(qty, 0)) * px_ / nav if nav else 0.0
-        target = 0.0 if sig["danger"] else TARGETS[tgt_key]
+        vol_kill = sig["short_vol"].get(sym, 0.0) >= SHORT_VOL_KILL
+        target = 0.0 if (sig["danger"] or vol_kill) else TARGETS[tgt_key]
         if rebalance_decision(target, frac):
             tgt_qty = -math.floor(target * nav / px_)
             delta = tgt_qty - qty
             side = "SELL SHORT" if delta < 0 else "BUY TO COVER"
-            band = f"band {target * BAND_LOW_MULT:.1%}-{target * BAND_HIGH_MULT:.1%}"
-            orders.append(
-                f"{side} {abs(delta)} {sym}: short is {frac:.1%} of NAV vs target "
-                f"{target:.1%} ({band}).")
+            if vol_kill and not sig["danger"]:
+                why = (f"VOL KILL-SWITCH: {sym} 20-day vol "
+                       f"{sig['short_vol'][sym]:.0%} >= {SHORT_VOL_KILL:.0%}")
+            else:
+                why = (f"short is {frac:.1%} of NAV vs target {target:.1%} "
+                       f"(band {target * BAND_LOW_MULT:.1%}-{target * BAND_HIGH_MULT:.1%})")
+            orders.append(f"{side} {abs(delta)} {sym}: {why}.")
 
     # 4) Short-vol sleeve: cap, recommend defined-risk instead.
     vol_val = abs(theme_val.get("vol_short", 0.0))
@@ -332,7 +342,9 @@ def render() -> None:
         st.dataframe(exposure, width="stretch")
     st.caption(
         f"Caps: crypto <= {TARGETS['crypto_cap']:.0%} | short-vol <= {TARGETS['vol_short_cap']:.0%} "
-        f"| cash floor {TARGETS['cash_floor']:.0%} | HIVE sleeve regime target: {sig['hive_note']}")
+        f"| cash floor {TARGETS['cash_floor']:.0%} | HIVE sleeve regime target: {sig['hive_note']} | "
+        f"Short-sleeve 20d vol (kill >= {SHORT_VOL_KILL:.0%}): "
+        f"SOXS {sig['short_vol']['SOXS']:.0%}, SQQQ {sig['short_vol']['SQQQ']:.0%}")
 
 
 def cli() -> None:
