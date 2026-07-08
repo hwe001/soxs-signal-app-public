@@ -317,17 +317,24 @@ def render() -> None:
     now_ny = datetime.now(ZoneInfo("America/New_York"))
     st.write(f"Data as of close **{sig['asof']}** — New York time now: {now_ny:%Y-%m-%d %H:%M}")
 
-    c1, c2, c3, c4, c5 = st.columns(5)
-    c1.metric("BTC vs 20-day MA", "ON ✅" if sig["btc_on"] else "OFF ❌",
-              f"{sig['btc']:,.0f} / {sig['btc_ma20']:,.0f}")
-    c2.metric("QQQ vs 50-day MA", "ON ✅" if sig["qqq_on"] else "OFF ❌",
-              f"{sig['qqq']:,.0f} / {sig['qqq_ma50']:,.0f}")
-    c3.metric("QQQ vs 200-day MA (core)", "ON ✅" if sig["qqq200_on"] else "OFF ❌",
-              f"{sig['qqq']:,.0f} / {sig['qqq_ma200']:,.0f}")
-    c4.metric("SMH vs 200-day MA", "ON ✅" if sig["smh_on"] else "OFF ❌",
-              f"{sig['smh']:,.0f} / {sig['smh_ma200']:,.0f}")
-    c5.metric("VIX", f"{sig['vix']:.1f}", "DANGER" if sig["danger"] else "ok",
-              delta_color="inverse")
+    def _pct_vs_ma(value: float, ma: float) -> float:
+        return (value / ma - 1.0) * 100 if ma else 0.0
+
+    gates = [
+        ("BTC vs 20-day MA", sig["btc_on"], _pct_vs_ma(sig["btc"], sig["btc_ma20"])),
+        ("QQQ vs 50-day MA", sig["qqq_on"], _pct_vs_ma(sig["qqq"], sig["qqq_ma50"])),
+        ("QQQ vs 200-day MA (core)", sig["qqq200_on"], _pct_vs_ma(sig["qqq"], sig["qqq_ma200"])),
+        ("SMH vs 200-day MA", sig["smh_on"], _pct_vs_ma(sig["smh"], sig["smh_ma200"])),
+    ]
+    gate_cols = st.columns(2)
+    for i, (label, on, pct) in enumerate(gates):
+        box = gate_cols[i % 2].success if on else gate_cols[i % 2].error
+        box(f"**{label}**  \n{'ON' if on else 'OFF'} ({pct:+.1f}% vs MA)")
+
+    if sig["danger"]:
+        st.error(f"**VIX** {sig['vix']:.1f} — DANGER (>= {VIX_DANGER:.0f})")
+    else:
+        st.info(f"**VIX** {sig['vix']:.1f} — calm ({VIX_DANGER - sig['vix']:.1f} pts of headroom before danger)")
 
     st.subheader("Today's orders")
     if orders:
