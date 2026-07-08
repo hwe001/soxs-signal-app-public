@@ -353,6 +353,36 @@ def render() -> None:
         f"Short-sleeve 20d vol (kill >= {SHORT_VOL_KILL:.0%}): "
         f"SOXS {sig['short_vol']['SOXS']:.0%}, SQQQ {sig['short_vol']['SQQQ']:.0%}")
 
+    # --- insider context (display only — weeks-horizon signal, never an
+    # order trigger; kept visually apart from Today's orders) -------------
+    st.subheader("Insider buys — S&P 500, last 10 days")
+
+    @st.cache_data(ttl=900)
+    def _insider() -> dict:
+        from insider_feed import load_insider_feed
+
+        return load_insider_feed()
+
+    feed = _insider()
+    if feed["error"] and not feed["records"]:
+        st.warning(f"Insider feed unavailable: {feed['error']}")
+    else:
+        freshness = f"data through **{feed['latest_date'] or 'unknown'}** · source: {feed['source']}"
+        if feed["stale"]:
+            st.error(f"STALE insider data — {freshness}")
+        else:
+            st.caption(freshness)
+        if not feed["records"]:
+            st.info("No qualifying insider buys in the last 10 days.")
+        for r in feed["records"]:
+            tag = (f"CLUSTER ×{r['cluster_size']}" if r.get("cluster_id")
+                   else ("CEO/CFO" if r.get("is_ceo_cfo") else "Officer"))
+            semi = " 🔶 **SEMI — you are short this theme**" if r.get("is_semi") else ""
+            line = (f"**[{tag}] {r['ticker']}** — {r['insider_name']} ({r['insider_role']}) "
+                    f"bought ${r['dollar_value']:,.0f} · filed {str(r['filed_at'])[:10]} · "
+                    f"[filing]({r['filing_url']}){semi}")
+            (st.warning if r.get("is_semi") else st.markdown)(line)
+
 
 def cli() -> None:
     positions = [{"symbol": s, "qty": 0, "theme": t} for s, t in THEME_MAP.items()]
