@@ -77,7 +77,9 @@ BAND_LOW_MULT = 0.65
 BAND_HIGH_MULT = 1.35
 
 VIX_DANGER = 40.0
-SHORT_VOL_KILL = 1.75  # cover a short sleeve when its 20-day realized vol >= 175%
+SHORT_VOL_KILL = 1.75    # cover a short sleeve when its 20-day realized vol >= 175%
+SMH_EXT_TRIG = 0.35      # melt-up hedge advisory when SMH >= 35% above its 200-day MA
+MELTUP_HEDGE_BUDGET = 0.02
 SIGNAL_SYMBOLS = ["BTC-USD", "QQQ", "SMH", "HIVE", "SOXS", "SQQQ", "^VIX"]
 
 
@@ -98,7 +100,12 @@ def fetch_closes(symbols: list[str], period: str = "2y") -> pd.DataFrame:
         h = yf.Ticker(sym).history(period=period, auto_adjust=True)["Close"]
         h.index = pd.to_datetime(h.index).tz_localize(None).normalize()
         frames[sym] = h
-    return pd.DataFrame(frames).sort_index().ffill()
+    df = pd.DataFrame(frames).sort_index()
+    # Anchor to US equity trading days: BTC trades weekends, and its rows
+    # would otherwise inject ffilled equity prices that shorten every
+    # moving-average lookback and dilute realized-vol calculations.
+    anchor = df["QQQ"].notna() if "QQQ" in df.columns else df.notna().any(axis=1)
+    return df.ffill()[anchor]
 
 
 def compute_signals(px: pd.DataFrame) -> dict:
@@ -113,6 +120,7 @@ def compute_signals(px: pd.DataFrame) -> dict:
     qqq_on = float(last["QQQ"]) >= qqq_ma50
     qqq200_on = float(last["QQQ"]) >= qqq_ma200
     smh_on = float(last["SMH"]) >= smh_ma200
+    smh_ext = float(last["SMH"]) / float(smh_ma200) - 1.0
     danger = vix >= VIX_DANGER
     short_vol = {
         sym: float(px[sym].pct_change().rolling(20).std().iloc[-1]) * math.sqrt(252)
@@ -147,6 +155,7 @@ def compute_signals(px: pd.DataFrame) -> dict:
         "hive_target": hive_target,
         "hive_note": hive_note,
         "short_vol": short_vol,
+        "smh_ext": smh_ext,
         "prices": {s: float(last[s]) for s in px.columns},
     }
 
@@ -244,6 +253,18 @@ def build_orders(positions: list[dict], option_values: dict, nav: float,
         orders.append(
             f"COVER short-vol positions (UVIX/UVXY, ~${vol_val:,.0f}): above the "
             f"{TARGETS['vol_short_cap']:.0%} cap. Unbounded tail risk; use puts on them instead.")
+
+    # 4b) Melt-up companion (advisory): small SOXS call overlay while semis are
+    # extremely extended. Monetizes within-melt-up corrections, not crashes —
+    # 20y backtest: +1.2 CAGR pts vs none, all of it in extension regimes.
+    if not sig["danger"] and sig["smh_ext"] >= SMH_EXT_TRIG:
+        budget = MELTUP_HEDGE_BUDGET * nav
+        orders.append(
+            f"ADVISORY — MELT-UP HEDGE: SMH is {sig['smh_ext']:.0%} above its 200-day MA "
+            f"(trigger {SMH_EXT_TRIG:.0%}). Hold ~{MELTUP_HEDGE_BUDGET:.0%} of NAV "
+            f"(${budget:,.0f}) in SOXS calls, 30-45 DTE, 20-30% OTM. Lottery-ticket "
+            f"sizing — expect full loss; it pays during violent corrections inside the "
+            f"melt-up. Drop it when extension falls below {SMH_EXT_TRIG:.0%}.")
 
     # 5) Cash floor check (informational).
     invested = sum(v for v in theme_val.values() if v > 0)
@@ -351,7 +372,8 @@ def render() -> None:
         f"Caps: crypto <= {TARGETS['crypto_cap']:.0%} | short-vol <= {TARGETS['vol_short_cap']:.0%} "
         f"| cash floor {TARGETS['cash_floor']:.0%} | HIVE sleeve regime target: {sig['hive_note']} | "
         f"Short-sleeve 20d vol (kill >= {SHORT_VOL_KILL:.0%}): "
-        f"SOXS {sig['short_vol']['SOXS']:.0%}, SQQQ {sig['short_vol']['SQQQ']:.0%}")
+        f"SOXS {sig['short_vol']['SOXS']:.0%}, SQQQ {sig['short_vol']['SQQQ']:.0%} | "
+        f"SMH extension {sig['smh_ext']:.0%} (melt-up hedge >= {SMH_EXT_TRIG:.0%})")
 
     # --- insider context (display only — weeks-horizon signal, never an
     # order trigger; kept visually apart from Today's orders) -------------
