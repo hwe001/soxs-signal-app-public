@@ -1,55 +1,6 @@
 {
- "generated": "2026-07-15T11:28:03Z",
- "through": "2026-07-14",
+ "generated": "2026-07-16T08:08:57Z",
+ "through": "2026-07-15",
  "days": 10,
- "qualifying": [
-  {
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/1063761/000118979326000011/form4-07012026_060744.xml",
-   "filed_at": "2026-07-01T23:59:59Z",
-   "ticker": "SPG",
-   "insider_name": "GLASSCOCK LARRY C",
-   "insider_role": "Other",
-   "is_ceo_cfo": false,
-   "transaction_code": "P",
-   "shares": 330.0,
-   "price": 223.14,
-   "dollar_value": 73636.2,
-   "rule_10b5_1": false,
-   "transaction_date": "2026-06-30",
-   "cluster_id": "SPG-2026-07-01",
-   "cluster_size": 3
-  },
-  {
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/1063761/000121098226000008/form4-07012026_060705.xml",
-   "filed_at": "2026-07-01T23:59:59Z",
-   "ticker": "SPG",
-   "insider_name": "LEIBOWITZ REUBEN S",
-   "insider_role": "Other",
-   "is_ceo_cfo": false,
-   "transaction_code": "P",
-   "shares": 430.0,
-   "price": 223.14,
-   "dollar_value": 95950.2,
-   "rule_10b5_1": false,
-   "transaction_date": "2026-06-30",
-   "cluster_id": "SPG-2026-07-01",
-   "cluster_size": 3
-  },
-  {
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/1063761/000146427326000008/form4-07012026_050712.xml",
-   "filed_at": "2026-07-01T23:59:59Z",
-   "ticker": "SPG",
-   "insider_name": "Smith Daniel C.",
-   "insider_role": "Other",
-   "is_ceo_cfo": false,
-   "transaction_code": "P",
-   "shares": 314.0,
-   "price": 223.14,
-   "dollar_value": 70065.96,
-   "rule_10b5_1": false,
-   "transaction_date": "2026-06-30",
-   "cluster_id": "SPG-2026-07-01",
-   "cluster_size": 3
-  }
- ]
+ "qualifying": []
 }
