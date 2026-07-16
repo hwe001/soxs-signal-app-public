@@ -77,7 +77,12 @@ BAND_LOW_MULT = 0.65
 BAND_HIGH_MULT = 1.35
 
 VIX_DANGER = 40.0
-SHORT_VOL_KILL = 1.75    # cover a short sleeve when its 20-day realized vol >= 175%
+SHORT_VOL_KILL = 1.75    # kill regime when a short sleeve's 20-day vol >= 175%
+# Kill regime resizes the sleeve to a FLOOR, not zero (ported from DRIFTNET
+# 2026-07-17, adopted there 2026-07-14): extreme vol is also peak decay, and
+# a quarter-size sleeve harvests more than its whipsaw costs — 10% floor on a
+# 40% target in DRIFTNET, same 0.25 ratio here.
+SHORT_KILL_FLOOR_FRAC = 0.25
 SMH_EXT_TRIG = 0.35      # melt-up hedge advisory when SMH >= 35% above its 200-day MA
 MELTUP_HEDGE_BUDGET = 0.02
 SIGNAL_SYMBOLS = ["BTC-USD", "QQQ", "SMH", "HIVE", "SOXS", "SQQQ", "^VIX"]
@@ -234,14 +239,17 @@ def build_orders(positions: list[dict], option_values: dict, nav: float,
         qty = int(df.loc[df["symbol"] == sym, "qty"].sum()) if len(df) else 0
         frac = abs(min(qty, 0)) * px_ / nav if nav else 0.0
         vol_kill = sig["short_vol"].get(sym, 0.0) >= SHORT_VOL_KILL
-        target = 0.0 if (sig["danger"] or vol_kill) else TARGETS[tgt_key]
+        full = TARGETS[tgt_key]
+        target = full * SHORT_KILL_FLOOR_FRAC if (sig["danger"] or vol_kill) else full
         if rebalance_decision(target, frac):
             tgt_qty = -math.floor(target * nav / px_)
             delta = tgt_qty - qty
             side = "SELL SHORT" if delta < 0 else "BUY TO COVER"
             if vol_kill and not sig["danger"]:
                 why = (f"VOL KILL-SWITCH: {sym} 20-day vol "
-                       f"{sig['short_vol'][sym]:.0%} >= {SHORT_VOL_KILL:.0%}")
+                       f"{sig['short_vol'][sym]:.0%} >= {SHORT_VOL_KILL:.0%} — "
+                       f"resize to the {target:.1%} kill floor (not zero: "
+                       f"extreme vol is peak decay)")
             else:
                 why = (f"short is {frac:.1%} of NAV vs target {target:.1%} "
                        f"(band {target * BAND_LOW_MULT:.1%}-{target * BAND_HIGH_MULT:.1%})")
