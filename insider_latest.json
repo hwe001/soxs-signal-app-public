@@ -1,6 +1,6 @@
 {
- "generated": "2026-07-25T11:07:27Z",
- "through": "2026-07-24",
+ "generated": "2026-07-28T08:30:03Z",
+ "through": "2026-07-27",
  "days": 10,
  "qualifying": [
   {
@@ -94,6 +94,22 @@
    "shares": 573613.767,
    "price": 26.15,
    "dollar_value": 15000000.01,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-07-23",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/63754/000006375426000284/form4.xml",
+   "filed_at": "2026-07-27T23:59:59Z",
+   "ticker": "MKC",
+   "insider_name": "Conway Michael Aaron",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 1100.0,
+   "price": 50.2067,
+   "dollar_value": 55227.37,
    "rule_10b5_1": false,
    "transaction_date": "2026-07-23",
    "cluster_id": null,
