@@ -1,24 +1,8 @@
 {
- "generated": "2026-08-07T10:50:46Z",
- "through": "2026-08-06",
+ "generated": "2026-08-08T06:47:54Z",
+ "through": "2026-08-07",
  "days": 10,
  "qualifying": [
-  {
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/1393818/000121390026081436/ownership.xml",
-   "filed_at": "2026-07-24T23:59:59Z",
-   "ticker": "NONE",
-   "insider_name": "Blackstone Private Multi-Asset Credit & Income Fund",
-   "insider_role": "Other",
-   "is_ceo_cfo": false,
-   "transaction_code": "P",
-   "shares": 573613.767,
-   "price": 26.15,
-   "dollar_value": 15000000.01,
-   "rule_10b5_1": false,
-   "transaction_date": "2026-07-23",
-   "cluster_id": null,
-   "cluster_size": 1
-  },
   {
    "filing_url": "https://www.sec.gov/Archives/edgar/data/63754/000006375426000284/form4.xml",
    "filed_at": "2026-07-27T23:59:59Z",
@@ -322,6 +306,22 @@
    "transaction_date": "2026-08-06",
    "cluster_id": null,
    "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/885725/000122520826007031/doc4.xml",
+   "filed_at": "2026-08-07T23:59:59Z",
+   "ticker": "BSX",
+   "insider_name": "Habiger David C",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 2100.0,
+   "price": 47.589,
+   "dollar_value": 99936.9,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-08-05",
+   "cluster_id": "BSX-2026-08-03",
+   "cluster_size": 3
   }
  ]
 }
