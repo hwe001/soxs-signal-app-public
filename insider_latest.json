@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-11T10:48:21Z",
- "through": "2026-08-10",
+ "generated": "2026-08-12T07:21:26Z",
+ "through": "2026-08-11",
  "days": 10,
  "qualifying": [
   {
@@ -306,6 +306,54 @@
    "transaction_date": "2026-08-05",
    "cluster_id": "BSX-2026-08-03",
    "cluster_size": 3
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1521332/000119312526344586/ownership.xml",
+   "filed_at": "2026-08-11T23:59:59Z",
+   "ticker": "APTV",
+   "insider_name": "CLARK KEVIN P",
+   "insider_role": "Chair and CEO",
+   "is_ceo_cfo": true,
+   "transaction_code": "P",
+   "shares": 51190.0,
+   "price": 48.8901,
+   "dollar_value": 2502684.22,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-08-10",
+   "cluster_id": "APTV-2026-08-06",
+   "cluster_size": 2
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/798354/000079835426000033/wk-form4_1786479310.xml",
+   "filed_at": "2026-08-11T23:59:59Z",
+   "ticker": "FISV",
+   "insider_name": "FRITZ LANCE M",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 10000.0,
+   "price": 51.95,
+   "dollar_value": 519500.0,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-08-07",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/906163/000090616326000095/wk-form4_1786455622.xml",
+   "filed_at": "2026-08-11T23:59:59Z",
+   "ticker": "NVR",
+   "insider_name": "Oliver George",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 63.0,
+   "price": 6431.51,
+   "dollar_value": 405185.13,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-08-07",
+   "cluster_id": null,
+   "cluster_size": 1
   }
  ]
 }
