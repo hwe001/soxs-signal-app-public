@@ -1,6 +1,6 @@
 {
- "generated": "2026-08-13T10:59:48Z",
- "through": "2026-08-12",
+ "generated": "2026-08-14T07:20:41Z",
+ "through": "2026-08-13",
  "days": 10,
  "qualifying": [
   {
@@ -608,6 +608,54 @@
    "dollar_value": 866395.41,
    "rule_10b5_1": false,
    "transaction_date": "2026-08-11",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1868275/000090514826003642/form4.xml",
+   "filed_at": "2026-08-13T23:59:59Z",
+   "ticker": "CEG",
+   "insider_name": "CRANDALL ROGER W",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 1500.0,
+   "price": 278.6206,
+   "dollar_value": 417930.9,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-08-11",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/886982/000088698226000495/wk-form4_1786672305.xml",
+   "filed_at": "2026-08-13T23:59:59Z",
+   "ticker": "ATTO",
+   "insider_name": "GOLDMAN SACHS GROUP INC",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 85000.0,
+   "price": 21.0,
+   "dollar_value": 1785000.0,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-08-05",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/886982/000088698226000495/wk-form4_1786672305.xml",
+   "filed_at": "2026-08-13T23:59:59Z",
+   "ticker": "ATTO",
+   "insider_name": "GOLDMAN SACHS GROUP INC",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 500000.0,
+   "price": 17.0,
+   "dollar_value": 8500000.0,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-08-06",
    "cluster_id": null,
    "cluster_size": 1
   }
