@@ -1,24 +1,8 @@
 {
- "generated": "2026-08-21T10:27:28Z",
- "through": "2026-08-20",
+ "generated": "2026-08-22T06:35:17Z",
+ "through": "2026-08-21",
  "days": 10,
  "qualifying": [
-  {
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/885725/000122520826007031/doc4.xml",
-   "filed_at": "2026-08-07T23:59:59Z",
-   "ticker": "BSX",
-   "insider_name": "Habiger David C",
-   "insider_role": "Other",
-   "is_ceo_cfo": false,
-   "transaction_code": "P",
-   "shares": 2100.0,
-   "price": 47.589,
-   "dollar_value": 99936.9,
-   "rule_10b5_1": false,
-   "transaction_date": "2026-08-05",
-   "cluster_id": "BSX-2026-08-03",
-   "cluster_size": 3
-  },
   {
    "filing_url": "https://www.sec.gov/Archives/edgar/data/1521332/000119312526344586/ownership.xml",
    "filed_at": "2026-08-11T23:59:59Z",
