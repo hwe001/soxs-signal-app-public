@@ -1,24 +1,8 @@
 {
- "generated": "2026-08-29T12:16:23Z",
- "through": "2026-08-28",
+ "generated": "2026-09-01T11:05:19Z",
+ "through": "2026-08-31",
  "days": 10,
  "qualifying": [
-  {
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/1521332/000119312526354007/ownership.xml",
-   "filed_at": "2026-08-17T23:59:59Z",
-   "ticker": "APTV",
-   "insider_name": "Agnevall Hakan",
-   "insider_role": "Other",
-   "is_ceo_cfo": false,
-   "transaction_code": "P",
-   "shares": 4100.0,
-   "price": 48.581,
-   "dollar_value": 199182.1,
-   "rule_10b5_1": false,
-   "transaction_date": "2026-08-13",
-   "cluster_id": "APTV-2026-08-11",
-   "cluster_size": 3
-  },
   {
    "filing_url": "https://www.sec.gov/Archives/edgar/data/1060391/000110465926098392/tm2623466-1_4seq1.xml",
    "filed_at": "2026-08-18T23:59:59Z",
