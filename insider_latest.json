@@ -1,24 +1,8 @@
 {
- "generated": "2026-09-02T10:37:26Z",
- "through": "2026-09-01",
+ "generated": "2026-09-03T10:40:35Z",
+ "through": "2026-09-02",
  "days": 10,
  "qualifying": [
-  {
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/1035443/000121695526000019/wk-form4_1787171829.xml",
-   "filed_at": "2026-08-19T23:59:59Z",
-   "ticker": "ARE",
-   "insider_name": "MARCUS JOEL S",
-   "insider_role": "Executive Chairman",
-   "is_ceo_cfo": false,
-   "transaction_code": "P",
-   "shares": 5000.0,
-   "price": 46.28,
-   "dollar_value": 231400.0,
-   "rule_10b5_1": false,
-   "transaction_date": "2026-08-17",
-   "cluster_id": null,
-   "cluster_size": 1
-  },
   {
    "filing_url": "https://www.sec.gov/Archives/edgar/data/1060391/000110465926099249/tm2623658-1_4seq1.xml",
    "filed_at": "2026-08-20T23:59:59Z",
@@ -784,6 +768,38 @@
    "dollar_value": 262996.31,
    "rule_10b5_1": false,
    "transaction_date": "2026-08-31",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1692819/000126840626000009/wk-form4_1788356308.xml",
+   "filed_at": "2026-09-02T23:59:59Z",
+   "ticker": "VST",
+   "insider_name": "BURKE JAMES A",
+   "insider_role": "President and CEO",
+   "is_ceo_cfo": true,
+   "transaction_code": "P",
+   "shares": 2200.0,
+   "price": 135.99,
+   "dollar_value": 299178.0,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-08-31",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1692819/000126840626000009/wk-form4_1788356308.xml",
+   "filed_at": "2026-09-02T23:59:59Z",
+   "ticker": "VST",
+   "insider_name": "BURKE JAMES A",
+   "insider_role": "President and CEO",
+   "is_ceo_cfo": true,
+   "transaction_code": "P",
+   "shares": 4465.0,
+   "price": 135.25,
+   "dollar_value": 603891.25,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-09-01",
    "cluster_id": null,
    "cluster_size": 1
   }
