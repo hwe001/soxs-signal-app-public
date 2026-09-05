@@ -1,6 +1,6 @@
 {
- "generated": "2026-09-04T10:35:51Z",
- "through": "2026-09-03",
+ "generated": "2026-09-05T09:57:18Z",
+ "through": "2026-09-04",
  "days": 10,
  "qualifying": [
   {
@@ -846,6 +846,22 @@
    "shares": 144179.0,
    "price": 223.9274,
    "dollar_value": 32285628.6,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-09-02",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1408198/000153260126000007/wk-form4_1788552024.xml",
+   "filed_at": "2026-09-04T23:59:59Z",
+   "ticker": "MSCI",
+   "insider_name": "Taneja Rajat",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 1786.0,
+   "price": 560.0,
+   "dollar_value": 1000160.0,
    "rule_10b5_1": false,
    "transaction_date": "2026-09-02",
    "cluster_id": null,
