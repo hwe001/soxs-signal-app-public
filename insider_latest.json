@@ -1,40 +1,8 @@
 {
- "generated": "2026-09-16T10:50:11Z",
- "through": "2026-09-15",
+ "generated": "2026-09-17T10:57:20Z",
+ "through": "2026-09-16",
  "days": 10,
  "qualifying": [
-  {
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/1692819/000126840626000009/wk-form4_1788356308.xml",
-   "filed_at": "2026-09-02T23:59:59Z",
-   "ticker": "VST",
-   "insider_name": "BURKE JAMES A",
-   "insider_role": "President and CEO",
-   "is_ceo_cfo": true,
-   "transaction_code": "P",
-   "shares": 2200.0,
-   "price": 135.99,
-   "dollar_value": 299178.0,
-   "rule_10b5_1": false,
-   "transaction_date": "2026-08-31",
-   "cluster_id": null,
-   "cluster_size": 1
-  },
-  {
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/1692819/000126840626000009/wk-form4_1788356308.xml",
-   "filed_at": "2026-09-02T23:59:59Z",
-   "ticker": "VST",
-   "insider_name": "BURKE JAMES A",
-   "insider_role": "President and CEO",
-   "is_ceo_cfo": true,
-   "transaction_code": "P",
-   "shares": 4465.0,
-   "price": 135.25,
-   "dollar_value": 603891.25,
-   "rule_10b5_1": false,
-   "transaction_date": "2026-09-01",
-   "cluster_id": null,
-   "cluster_size": 1
-  },
   {
    "filing_url": "https://www.sec.gov/Archives/edgar/data/315293/000119312526382419/ownership.xml",
    "filed_at": "2026-09-03T23:59:59Z",
@@ -834,6 +802,22 @@
    "transaction_date": "2026-09-11",
    "cluster_id": "COO-2026-09-15",
    "cluster_size": 3
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1754301/000162828026062330/wk-form4_1789596176.xml",
+   "filed_at": "2026-09-16T23:59:59Z",
+   "ticker": "FOX",
+   "insider_name": "MURDOCH LACHLAN K",
+   "insider_role": "Executive Chair, CEO",
+   "is_ceo_cfo": true,
+   "transaction_code": "P",
+   "shares": 149934.0,
+   "price": 68.53,
+   "dollar_value": 10274977.02,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-09-15",
+   "cluster_id": null,
+   "cluster_size": 1
   }
  ]
 }
