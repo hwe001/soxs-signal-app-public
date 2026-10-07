@@ -1,6 +1,6 @@
 {
- "generated": "2026-10-06T12:46:59Z",
- "through": "2026-10-05",
+ "generated": "2026-10-07T12:38:28Z",
+ "through": "2026-10-06",
  "days": 10,
  "qualifying": [
   {
@@ -528,6 +528,22 @@
    "dollar_value": 404483.95,
    "rule_10b5_1": false,
    "transaction_date": "2026-10-02",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/48465/000153137626000014/wk-form4_1791318763.xml",
+   "filed_at": "2026-10-06T23:59:59Z",
+   "ticker": "HRL",
+   "insider_name": "Newlands William A",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 10000.0,
+   "price": 20.1,
+   "dollar_value": 201000.0,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-10-05",
    "cluster_id": null,
    "cluster_size": 1
   }
