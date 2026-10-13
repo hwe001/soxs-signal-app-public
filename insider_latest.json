@@ -1,24 +1,8 @@
 {
- "generated": "2026-10-10T11:54:08Z",
- "through": "2026-10-09",
+ "generated": "2026-10-13T13:33:03Z",
+ "through": "2026-10-12",
  "days": 10,
  "qualifying": [
-  {
-   "filing_url": "https://www.sec.gov/Archives/edgar/data/1156375/000121285226000005/wk-form4_1790626530.xml",
-   "filed_at": "2026-09-28T23:59:59Z",
-   "ticker": "CME",
-   "insider_name": "SHEPARD WILLIAM R",
-   "insider_role": "Other",
-   "is_ceo_cfo": false,
-   "transaction_code": "P",
-   "shares": 292.55,
-   "price": 268.76,
-   "dollar_value": 78625.74,
-   "rule_10b5_1": false,
-   "transaction_date": "2026-09-25",
-   "cluster_id": null,
-   "cluster_size": 1
-  },
   {
    "filing_url": "https://www.sec.gov/Archives/edgar/data/920760/000119312526409451/ownership.xml",
    "filed_at": "2026-09-30T23:59:59Z",
