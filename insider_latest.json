@@ -1,6 +1,6 @@
 {
- "generated": "2026-10-23T10:59:54Z",
- "through": "2026-10-22",
+ "generated": "2026-10-24T10:16:35Z",
+ "through": "2026-10-23",
  "days": 10,
  "qualifying": [
   {
@@ -64,6 +64,54 @@
    "dollar_value": 1281388.92,
    "rule_10b5_1": false,
    "transaction_date": "2026-10-14",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000508/primary_doc.xml",
+   "filed_at": "2026-10-23T23:59:59Z",
+   "ticker": "PNI",
+   "insider_name": "BANK OF AMERICA CORP /DE/",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 12170.0,
+   "price": 6.334,
+   "dollar_value": 77084.78,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-10-21",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1393818/000121390026112119/ownership.xml",
+   "filed_at": "2026-10-23T23:59:59Z",
+   "ticker": "NONE",
+   "insider_name": "Blackstone Holdings IV L.P.",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 76335.878,
+   "price": 26.2,
+   "dollar_value": 2000000.0,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-10-21",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1393818/000121390026112119/ownership.xml",
+   "filed_at": "2026-10-23T23:59:59Z",
+   "ticker": "NONE",
+   "insider_name": "Blackstone Holdings IV L.P.",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 27718.571,
+   "price": 26.2,
+   "dollar_value": 726226.56,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-10-21",
    "cluster_id": null,
    "cluster_size": 1
   }
