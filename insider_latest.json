@@ -1,6 +1,6 @@
 {
- "generated": "2026-10-27T11:35:33Z",
- "through": "2026-10-26",
+ "generated": "2026-10-28T12:06:16Z",
+ "through": "2026-10-27",
  "days": 10,
  "qualifying": [
   {
@@ -112,6 +112,38 @@
    "dollar_value": 726226.56,
    "rule_10b5_1": false,
    "transaction_date": "2026-10-21",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1176948/000110465926119177/tm2628366-1_4seq1.xml",
+   "filed_at": "2026-10-27T23:59:59Z",
+   "ticker": "CTEV",
+   "insider_name": "ARES MANAGEMENT LLC",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 50000.0,
+   "price": 23.5328,
+   "dollar_value": 1176640.0,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-10-23",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1176948/000110465926119177/tm2628366-1_4seq1.xml",
+   "filed_at": "2026-10-27T23:59:59Z",
+   "ticker": "CTEV",
+   "insider_name": "ARES MANAGEMENT LLC",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 20834.0,
+   "price": 24.0696,
+   "dollar_value": 501466.05,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-10-26",
    "cluster_id": null,
    "cluster_size": 1
   }
