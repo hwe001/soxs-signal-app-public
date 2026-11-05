@@ -1,6 +1,6 @@
 {
- "generated": "2026-11-04T13:47:41Z",
- "through": "2026-11-03",
+ "generated": "2026-11-05T14:00:13Z",
+ "through": "2026-11-04",
  "days": 10,
  "qualifying": [
   {
@@ -368,6 +368,22 @@
    "dollar_value": 99887.4,
    "rule_10b5_1": false,
    "transaction_date": "2026-10-30",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000195/form4.xml",
+   "filed_at": "2026-11-04T23:59:59Z",
+   "ticker": "INTC",
+   "insider_name": "TAN LIP BU",
+   "insider_role": "CEO",
+   "is_ceo_cfo": true,
+   "transaction_code": "P",
+   "shares": 150000.0,
+   "price": 64.7312,
+   "dollar_value": 9709680.0,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-11-02",
    "cluster_id": null,
    "cluster_size": 1
   }
