@@ -1,6 +1,6 @@
 {
- "generated": "2026-11-13T13:56:06Z",
- "through": "2026-11-12",
+ "generated": "2026-11-14T12:57:55Z",
+ "through": "2026-11-13",
  "days": 10,
  "qualifying": [
   {
@@ -448,6 +448,54 @@
    "dollar_value": 184875.0,
    "rule_10b5_1": false,
    "transaction_date": "2026-11-12",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/1086222/000110623226000012/wk-form4_1794605027.xml",
+   "filed_at": "2026-11-13T23:59:59Z",
+   "ticker": "AKAM",
+   "insider_name": "LEIGHTON F THOMSON",
+   "insider_role": "Chief Executive Officer",
+   "is_ceo_cfo": true,
+   "transaction_code": "P",
+   "shares": 30000.0,
+   "price": 85.08,
+   "dollar_value": 2552400.0,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-11-13",
+   "cluster_id": null,
+   "cluster_size": 1
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/18230/000110465926127088/tm2629746-1_4seq1.xml",
+   "filed_at": "2026-11-13T23:59:59Z",
+   "ticker": "CAT",
+   "insider_name": "MacLennan David",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 350.0,
+   "price": 596.1,
+   "dollar_value": 208635.0,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-11-12",
+   "cluster_id": "CAT-2026-11-03",
+   "cluster_size": 2
+  },
+  {
+   "filing_url": "https://www.sec.gov/Archives/edgar/data/106535/000119719326000008/ownership.xml",
+   "filed_at": "2026-11-13T23:59:59Z",
+   "ticker": "WY",
+   "insider_name": "BECKWITT RICHARD",
+   "insider_role": "Other",
+   "is_ceo_cfo": false,
+   "transaction_code": "P",
+   "shares": 15000.0,
+   "price": 20.44,
+   "dollar_value": 306600.0,
+   "rule_10b5_1": false,
+   "transaction_date": "2026-11-11",
    "cluster_id": null,
    "cluster_size": 1
   }
